@@ -1,0 +1,1 @@
+ALTER TABLE public.timeline_folders ADD COLUMN IF NOT EXISTS time_period text;

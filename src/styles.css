@@ -1,0 +1,282 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system — Kỷ niệm 30 năm THPT Bà Điểm
+ * Hướng dẫn: xanh dương tươi (#2B8CE6) + kem giấy cổ + điểm nhấn vàng đồng.
+ * Mọi màu đều qua token ở đây, không hardcode trong component.
+ */
+
+@theme {
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Lora", Georgia, serif;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #ffffff;
+  --foreground: #1b3f66;
+  --card: #ffffff;
+  --card-foreground: #1b3f66;
+  --popover: #ffffff;
+  --popover-foreground: #1b3f66;
+  --primary: #1f6fb5;
+  --primary-foreground: #f2f8ff;
+  --secondary: #e6f2fd;
+  --secondary-foreground: #0f4f8a;
+  --muted: oklch(0.942 0.012 95);
+  --muted-foreground: #3f5f7c;
+  --accent: oklch(0.8 0.115 85);
+  --accent-foreground: oklch(0.3 0.06 85);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0.01 95);
+  --border: oklch(0.89 0.018 95);
+  --input: oklch(0.89 0.018 95);
+  --ring: #58a9f0;
+  --gold: oklch(0.81 0.12 85);
+  --gold-deep: oklch(0.65 0.11 78);
+  --navy: #1f6fb5;
+  --navy-deep: #1a78cf;
+}
+
+.dark {
+  --background: oklch(0.2 0.05 262);
+  --foreground: #e8f1fa;
+  --card: oklch(0.26 0.055 262);
+  --card-foreground: #e8f1fa;
+  --popover: oklch(0.26 0.055 262);
+  --popover-foreground: #e8f1fa;
+  --primary: #58a9f0;
+  --primary-foreground: #0b2540;
+  --secondary: #14334f;
+  --secondary-foreground: #e8f1fa;
+  --muted: oklch(0.3 0.05 262);
+  --muted-foreground: #9fb4c8;
+  --accent: oklch(0.81 0.12 85);
+  --accent-foreground: oklch(0.3 0.06 85);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.98 0.01 95);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: #4a9be8;
+  --gold: oklch(0.81 0.12 85);
+  --gold-deep: oklch(0.65 0.11 78);
+  --navy: #58a9f0;
+  --navy-deep: #0a2740;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ---- Hiệu ứng chuyển động lướt ngang (infinite marquee) ---- */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 55s linear infinite;
+}
+
+@utility marquee-track-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 65s linear infinite reverse;
+}
+
+/* ---- Nền hero: ảnh /anh.jpg (thư mục public) + lớp phủ xanh dương trong, dịu mắt ---- */
+@utility hero-navy {
+  background-color: #14416b;
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(18, 62, 104, 0.82) 0%,
+      rgba(22, 76, 125, 0.68) 50%,
+      rgba(26, 88, 142, 0.55) 100%
+    ),
+    url("/anh.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@utility gold-text {
+  color: var(--gold);
+}
+
+/* ---- Nội dung bài viết (Tiptap) trong trang Hành trình 30 năm ---- */
+.timeline-prose {
+  line-height: 1.75;
+  color: var(--color-foreground);
+  overflow-wrap: break-word;
+}
+.timeline-prose::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.timeline-prose p {
+  margin: 0.75em 0;
+}
+.timeline-prose h2,
+.timeline-prose h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1.4em 0 0.5em;
+}
+.timeline-prose h2 {
+  font-size: 1.55em;
+}
+.timeline-prose h3 {
+  font-size: 1.25em;
+}
+.timeline-prose ul,
+.timeline-prose ol {
+  margin: 0.75em 0;
+  padding-left: 1.6em;
+}
+.timeline-prose ul {
+  list-style: disc;
+}
+.timeline-prose ol {
+  list-style: decimal;
+}
+.timeline-prose li {
+  margin: 0.3em 0;
+}
+.timeline-prose blockquote {
+  margin: 1.1em 0;
+  border-left: 3px solid var(--color-accent);
+  padding: 0.2em 0 0.2em 1em;
+  color: var(--color-muted-foreground);
+  font-style: italic;
+}
+.timeline-prose hr {
+  margin: 1.75em 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+.timeline-prose a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* Ảnh trong bài: căn lề, kích thước, xuyên chữ lưu bằng data-attribute */
+.timeline-prose figure {
+  margin: 1.4em auto;
+  max-width: 62%;
+}
+.timeline-prose figure[data-width="sm"] {
+  max-width: 38%;
+}
+.timeline-prose figure[data-width="lg"] {
+  max-width: 82%;
+}
+.timeline-prose figure[data-width="full"] {
+  max-width: 100%;
+}
+.timeline-prose figure[data-align="left"] {
+  margin-left: 0;
+  margin-right: auto;
+}
+.timeline-prose figure[data-align="right"] {
+  margin-left: auto;
+  margin-right: 0;
+}
+.timeline-prose figure[data-float="left"] {
+  float: left;
+  margin: 0.4em 1.4em 1em 0;
+}
+.timeline-prose figure[data-float="right"] {
+  float: right;
+  margin: 0.4em 0 1em 1.4em;
+}
+.timeline-prose figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.9rem;
+  box-shadow: 0 10px 25px rgb(27 63 102 / 0.12);
+}
+.timeline-prose figcaption {
+  margin-top: 0.55em;
+  font-size: 0.85em;
+  color: var(--color-muted-foreground);
+  text-align: center;
+}
+.timeline-prose figure[data-align="left"] figcaption {
+  text-align: left;
+}
+.timeline-prose figure[data-align="right"] figcaption {
+  text-align: right;
+}
+
+/* Trình soạn thảo: chỗ trống + placeholder */
+.timeline-editor {
+  min-height: 240px;
+  outline: none;
+  padding: 0.25rem 0.25rem 3rem;
+}
+.timeline-editor .is-empty::before {
+  content: attr(data-placeholder);
+  color: var(--color-muted-foreground);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.timeline-editor figcaption {
+  min-height: 1.2em;
+}

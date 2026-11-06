@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.touch_timeline_row() FROM anon, authenticated, public;
